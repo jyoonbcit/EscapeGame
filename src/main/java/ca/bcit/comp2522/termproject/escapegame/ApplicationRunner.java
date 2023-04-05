@@ -14,6 +14,7 @@ public class ApplicationRunner extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("starting-screen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

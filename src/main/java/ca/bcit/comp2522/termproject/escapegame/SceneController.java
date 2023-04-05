@@ -14,11 +14,12 @@ public class SceneController {
     private Scene scene;
     private Parent root;
 
-    public void switchToHardPuzzleScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("hard-puzzle.fxml"));
+    public void switchToGameScene(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("game-scene.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 }

@@ -7,23 +7,6 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.bcit.comp2522.termproject.escapegame.SceneController">
-   <left>
-      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets left="50.0" />
-         </BorderPane.margin>
-      </Button>
-   </left>
-   <right>
-      <Button fx:id="startHardPuzzle" mnemonicParsing="false" onAction="#switchToHardPuzzleScene" text="Hard" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets right="50.0" />
-         </BorderPane.margin>
-      </Button>
-   </right>
-   <center>
-      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </center>
    <top>
       <TextField text="Escape Game" BorderPane.alignment="CENTER">
          <font>
@@ -31,4 +14,11 @@
          </font>
       </TextField>
    </top>
+   <center>
+      <Button fx:id="startGame" mnemonicParsing="false" onAction="#switchToGameScene" text="Start Game" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Button>
+   </center>
 </BorderPane>
