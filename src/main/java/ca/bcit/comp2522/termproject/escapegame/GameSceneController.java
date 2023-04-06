@@ -5,7 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class SceneController {
+public class GameSceneController {
+
+    @FXML
+    private Text codeword;
+
     @FXML
     private Button keyBtn;
 
@@ -44,9 +48,6 @@ public class SceneController {
     private Button paperBtn;
 
     @FXML
-    private Button doorBtn;
-
-    @FXML
     private Button closetBtn;
 
     @FXML
@@ -57,6 +58,9 @@ public class SceneController {
 
     @FXML
     private Button laptopBtn;
+
+    @FXML
+    private TextArea input;
 
     private Stage stage;
 
@@ -70,7 +74,7 @@ public class SceneController {
 
     private boolean hasClosetKey;
 
-    public SceneController() {
+    public GameSceneController() {
         this.hasScrewdriver = false;
         this.hasWon = false;
     }
@@ -115,28 +119,37 @@ public class SceneController {
         keyBtn = (Button) loader.getNamespace().get("keyBtn");
         keyImage = (ImageView) loader.getNamespace().get("keyImage");
         closetBtn = (Button) loader.getNamespace().get("closetBtn");
-        doorBtn = (Button) loader.getNamespace().get("doorBtn");
+
+        System.out.println(hasScrewdriver);
         paintingBtn.setOnMouseClicked(e -> {
-            if (hasScrewdriver == true) {
+            if (isHasScrewdriver()) {
                 showDialogue("You unscrew the frame.", dialogue);
                 paintingImage.setVisible(false);
             } else {
                 showDialogue("The frame is screwed onto the wall.", dialogue);
+                System.out.println(hasScrewdriver);
             }
         });
         keyBtn.setOnMouseClicked(f -> {
             showDialogue("You found a closet key!", dialogue);
-            hasClosetKey = true;
+            setHasClosetKey(true);
             keyImage.setVisible(false);
         });
         closetBtn.setOnMouseClicked(g -> {
-            if (hasClosetKey) {
+            if (isHasClosetKey()) {
                 showDialogue("You open the closet.", dialogue);
                 laptopImage = (ImageView) loader.getNamespace().get("laptopImage");
                 laptopBtn = (Button) loader.getNamespace().get("laptopBtn");
                 laptopImage.setVisible(true);
                 laptopBtn.setOnMouseClicked(h -> {
-                    if (hasWon = true) {
+                    try {
+                        switchToComputerScene(event);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (hasWon) {
                         showDialogue("The door has opened.", dialogue);
                     } else {
                         showDialogue("Try again.", dialogue);
@@ -144,11 +157,9 @@ public class SceneController {
                 });
             }
         });
-        doorBtn.setOnMouseClicked(h -> {
-            //
-        });
     }
 
+    @FXML
     public void switchToDrawerScene(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("drawer-scene.fxml"));
         root = loader.load();
@@ -174,11 +185,11 @@ public class SceneController {
                 String userGuess = pinInput.getText();
                 System.out.println(userGuess);
                 if (userGuess.equals("1001")) {
-                    // TODO: Implement inside safe
                     pinInput.setVisible(false);
                     submitPinInput.setVisible(false);
                     showDialogue("You found a screwdriver!", dialogue);
-                    hasScrewdriver = true;
+                    setHasScrewdriver(true);
+                    stage.setUserData(true);
                 } else {
                     pinInput.setVisible(false);
                     submitPinInput.setVisible(false);
@@ -188,7 +199,7 @@ public class SceneController {
         });
     }
 
-    public void switchToComputerScene(MouseEvent event) throws IOException {
+    public void switchToComputerScene(MouseEvent event) throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("computer-scene.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -196,6 +207,27 @@ public class SceneController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
+        codeword = (Text) loader.getNamespace().get("codeword");
+        input = (TextArea) loader.getNamespace().get("input");
+
+        codeword.setText("I love programming!");
+
+        int duration = 3;
+        String currentAnswer;
+        for (int i = 0; i < duration; i++) {
+            showDialogue(String.valueOf(i), dialogue);
+            currentAnswer = input.getText();
+            if (currentAnswer.equals(codeword.getText())) {
+                setHasWon(true);
+                break;
+            }
+            Thread.sleep(500);
+        }
+        if (isHasWon()) {
+            showDialogue("You've beat the game.", dialogue);
+            // TODO: Enter name into leaderboard
+        }
     }
 
     public void showDialogue(String msg, Text textNode) {
@@ -206,5 +238,29 @@ public class SceneController {
 
     public void hideDialogue(Text textNode) {
         textNode.setVisible(false);
+    }
+
+    public boolean isHasWon() {
+        return hasWon;
+    }
+
+    public void setHasWon(boolean hasWon) {
+        this.hasWon = hasWon;
+    }
+
+    public boolean isHasScrewdriver() {
+        return hasScrewdriver;
+    }
+
+    public void setHasScrewdriver(boolean hasScrewdriver) {
+        this.hasScrewdriver = hasScrewdriver;
+    }
+
+    public boolean isHasClosetKey() {
+        return hasClosetKey;
+    }
+
+    public void setHasClosetKey(boolean hasClosetKey) {
+        this.hasClosetKey = hasClosetKey;
     }
 }
