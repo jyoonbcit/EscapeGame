@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.bcit.comp2522.termproject.escapegame.SceneController">
    <children>
-      <Button layoutX="449.0" layoutY="168.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="125.0" layoutY="168.0" mnemonicParsing="false" text="Button" />
+      <ImageView fitHeight="412.0" fitWidth="677.0" layoutX="-70.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/room.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="274.0" layoutX="47.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/desk.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="171.0" fitWidth="166.0" layoutX="107.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/painting.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="289.0" fitWidth="253.0" layoutX="314.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/closet.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="312.0" fitWidth="153.0" layoutX="538.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/door.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="deskBtn" layoutX="76.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#switchToDrawerScene" prefHeight="99.0" prefWidth="214.0" text="Desk" />
+      <Button fx:id="paintingBtn" layoutX="132.0" layoutY="99.0" mnemonicParsing="false" prefHeight="133.0" prefWidth="97.0" text="Painting" />
+      <Button fx:id="closetBtn" layoutX="384.0" layoutY="116.0" mnemonicParsing="false" prefHeight="221.0" prefWidth="109.0" text="Closet" />
+      <Button fx:id="doorBtn" layoutX="549.0" layoutY="99.0" mnemonicParsing="false" prefHeight="238.0" prefWidth="60.0" text="Door" />
    </children>
 </AnchorPane>

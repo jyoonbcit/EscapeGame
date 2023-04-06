@@ -15,7 +15,7 @@
       </TextField>
    </top>
    <center>
-      <Button fx:id="startGame" mnemonicParsing="false" onAction="#switchToGameScene" text="Start Game" BorderPane.alignment="CENTER">
+      <Button fx:id="startGame" mnemonicParsing="false" onMouseClicked="#switchToGameScene" text="Start Game" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
