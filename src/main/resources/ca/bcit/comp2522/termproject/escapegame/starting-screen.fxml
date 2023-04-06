@@ -8,9 +8,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.bcit.comp2522.termproject.escapegame.SceneController">
    <top>
-      <TextField text="Escape Game" BorderPane.alignment="CENTER">
+      <TextField alignment="CENTER" editable="false" text="Escape Game" BorderPane.alignment="CENTER">
          <font>
-            <Font size="75.0" />
+            <Font name="Courier New" size="75.0" />
          </font>
       </TextField>
    </top>
@@ -21,4 +21,14 @@
          </BorderPane.margin>
       </Button>
    </center>
+   <bottom>
+      <Button fx:id="leaderboardBtn" mnemonicParsing="false" onMouseClicked="#switchToLeaderboardScene" text="Leaderboard" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets bottom="100.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>
