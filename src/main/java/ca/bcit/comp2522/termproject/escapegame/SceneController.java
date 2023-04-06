@@ -8,11 +8,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class SceneController {
+    @FXML
+    private Button submitPinInput;
+
+    @FXML
+    private TextField pinInput;
+
+    @FXML
+    private Button safeBtn;
+
     @FXML
     private Button paperBtn;
 
@@ -43,16 +53,36 @@ public class SceneController {
         stage.setResizable(false);
         stage.show();
 
-        // Button setup
+        // Stage setup
         paperBtn = (Button) loader.getNamespace().get("paperBtn");
+        safeBtn = (Button) loader.getNamespace().get("safeBtn");
+        submitPinInput = (Button) loader.getNamespace().get("submitPinInput");
+        pinInput = (TextField) loader.getNamespace().get("pinInput");
         dialogue = (Text) loader.getNamespace().get("dialogue");
-        dialogue.setVisible(false);
         paperBtn.setOnMouseClicked(e -> showDialogue("XXXX is written on the paper.", dialogue));
+
+        safeBtn.setOnMouseClicked(e -> {
+            pinInput.setVisible(true);
+            showDialogue("Enter the PIN", dialogue);
+            submitPinInput.setVisible(true);
+            submitPinInput.setOnMouseClicked(f -> {
+                String userGuess = pinInput.getText();
+                // TODO: Update this to if userGuess = PIN
+                if (false) {
+                    // TODO
+                } else {
+                    pinInput.setVisible(false);
+                    submitPinInput.setVisible(false);
+                    showDialogue("Wrong pin. Try again.", dialogue);
+                }
+            });
+        });
     }
 
     public void showDialogue(String msg, Text textNode) {
         textNode.setText(msg);
         textNode.setVisible(true);
+        scene.setOnMouseClicked(e -> hideDialogue(dialogue));
     }
 
     public void hideDialogue(Text textNode) {
