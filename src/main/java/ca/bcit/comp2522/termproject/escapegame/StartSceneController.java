@@ -2,6 +2,7 @@ package ca.bcit.comp2522.termproject.escapegame;
 
 import java.io.IOException;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class StartSceneController {
     private Parent root;
 
     public void switchToStartingScene(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("starting-screen.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
