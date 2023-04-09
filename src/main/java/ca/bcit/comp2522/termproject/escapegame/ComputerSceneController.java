@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
@@ -37,13 +36,6 @@ public class ComputerSceneController {
 
     public void switchToComputerScene(MouseEvent event) throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("computer-scene.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-
         codeword = (Text) loader.getNamespace().get("codeword");
         input = (TextArea) loader.getNamespace().get("input");
 
@@ -60,7 +52,7 @@ public class ComputerSceneController {
             }
             Thread.sleep(500);
         }
-        if (isHasWon()) {
+        if (getHasWon()) {
             showDialogue("You've beat the game.", dialogue);
             // TODO: Enter name into leaderboard
         }
@@ -76,11 +68,27 @@ public class ComputerSceneController {
         textNode.setVisible(false);
     }
 
-    public boolean isHasWon() {
+    public boolean getHasWon() {
         return hasWon;
     }
 
     public void setHasWon(boolean hasWon) {
         this.hasWon = hasWon;
+    }
+
+    public boolean getHasScrewdriver() {
+        return hasScrewdriver;
+    }
+
+    public void setHasScrewdriver(boolean hasScrewdriver) {
+        this.hasScrewdriver = hasScrewdriver;
+    }
+
+    public boolean getHasClosetKey() {
+        return hasClosetKey;
+    }
+
+    public void setHasClosetKey(boolean hasClosetKey) {
+        this.hasClosetKey = hasClosetKey;
     }
 }

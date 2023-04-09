@@ -70,19 +70,25 @@ public class DrawerSceneController {
                     pinInput.setVisible(false);
                     submitPinInput.setVisible(false);
                     showDialogue("You found a screwdriver!", dialogue);
-                    setHasScrewdriver(true);
-                    stage.setUserData(true);
+                    hasScrewdriver = true;
+                    // TODO
+                    System.out.println("FOUND: " + hasScrewdriver);
                 } else {
                     pinInput.setVisible(false);
                     submitPinInput.setVisible(false);
                     showDialogue("Wrong pin. Try again.", dialogue);
+                    System.out.println("FOUND: " + hasScrewdriver);
                 }
             });
         });
     }
 
     public void switchToGameScene(MouseEvent event) throws IOException {
-        GameSceneController gsc = new GameSceneController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("game-scene.fxml"));
+        root = loader.load();
+        GameSceneController gsc = loader.getController();
+        gsc.setHasClosetKey(hasClosetKey);
+        gsc.setHasScrewdriver(hasScrewdriver);
         gsc.switchToGameScene(event);
     }
 
@@ -96,7 +102,19 @@ public class DrawerSceneController {
         textNode.setVisible(false);
     }
 
+    public boolean getHasScrewdriver() {
+        return hasScrewdriver;
+    }
+
     public void setHasScrewdriver(boolean hasScrewdriver) {
         this.hasScrewdriver = hasScrewdriver;
+    }
+
+    public boolean getHasClosetKey() {
+        return hasClosetKey;
+    }
+
+    public void setHasClosetKey(boolean hasClosetKey) {
+        this.hasClosetKey = hasClosetKey;
     }
 }

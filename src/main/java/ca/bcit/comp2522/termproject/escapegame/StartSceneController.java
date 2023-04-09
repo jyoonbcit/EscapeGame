@@ -2,6 +2,7 @@ package ca.bcit.comp2522.termproject.escapegame;
 
 import java.io.IOException;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
