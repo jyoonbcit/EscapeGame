@@ -55,6 +55,9 @@ public class GameSceneController {
     private boolean hasClosetKey;
 
     public void switchToGameScene(MouseEvent event) throws IOException {
+        // TODO
+        System.out.println("CURRENT:" + hasScrewdriver + " " + hasClosetKey);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-scene.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -75,9 +78,8 @@ public class GameSceneController {
         keyImage = (ImageView) loader.getNamespace().get("keyImage");
         closetBtn = (Button) loader.getNamespace().get("closetBtn");
 
-        System.out.println(hasScrewdriver);
         paintingBtn.setOnMouseClicked(e -> {
-            if (isHasScrewdriver()) {
+            if (hasScrewdriver) {
                 showDialogue("You unscrew the frame.", dialogue);
                 paintingImage.setVisible(false);
             } else {
@@ -87,19 +89,18 @@ public class GameSceneController {
         });
         keyBtn.setOnMouseClicked(f -> {
             showDialogue("You found a closet key!", dialogue);
-            setHasClosetKey(true);
+            hasClosetKey = true;
             keyImage.setVisible(false);
         });
         closetBtn.setOnMouseClicked(g -> {
-            if (isHasClosetKey()) {
+            if (hasClosetKey) {
                 showDialogue("You open the closet.", dialogue);
                 laptopImage = (ImageView) loader.getNamespace().get("laptopImage");
                 laptopBtn = (Button) loader.getNamespace().get("laptopBtn");
                 laptopImage.setVisible(true);
                 laptopBtn.setOnMouseClicked(h -> {
                     try {
-                        ComputerSceneController csc = new ComputerSceneController();
-                        csc.switchToComputerScene(event);
+                        switchToComputerScene(event);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     } catch (InterruptedException e) {
@@ -116,8 +117,21 @@ public class GameSceneController {
     }
 
     public void switchToDrawerScene(MouseEvent event) throws IOException {
-        DrawerSceneController dsc = new DrawerSceneController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("drawer-scene.fxml"));
+        root = loader.load();
+        DrawerSceneController dsc = loader.getController();
+        dsc.setHasClosetKey(hasClosetKey);
+        dsc.setHasScrewdriver(hasScrewdriver);
         dsc.switchToDrawerScene(event);
+    }
+
+    public void switchToComputerScene(MouseEvent event) throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("computer-scene.fxml"));
+        root = loader.load();
+        ComputerSceneController csc = loader.getController();
+        csc.setHasClosetKey(hasClosetKey);
+        csc.setHasScrewdriver(hasScrewdriver);
+        csc.switchToComputerScene(event);
     }
 
     public void showDialogue(String msg, Text textNode) {
@@ -130,11 +144,15 @@ public class GameSceneController {
         textNode.setVisible(false);
     }
 
-    public boolean isHasScrewdriver() {
+    public boolean getHasScrewdriver() {
         return hasScrewdriver;
     }
 
-    public boolean isHasClosetKey() {
+    public void setHasScrewdriver(boolean hasScrewdriver) {
+        this.hasScrewdriver = hasScrewdriver;
+    }
+
+    public boolean getHasClosetKey() {
         return hasClosetKey;
     }
 
