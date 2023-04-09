@@ -25,4 +25,8 @@ public class LeaderboardSceneController {
         stage.setResizable(false);
         stage.show();
     }
+    public void switchToStartScene(MouseEvent event) throws IOException {
+        StartSceneController ssc = new StartSceneController();
+        ssc.switchToStartingScene(event);
+    }
 }

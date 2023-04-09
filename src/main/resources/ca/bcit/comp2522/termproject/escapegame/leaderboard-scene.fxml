@@ -12,6 +12,6 @@
             <Font size="46.0" />
          </font>
       </Text>
-      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Back to main menu" />
+      <Button fx:id="startScreenBtn" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#switchToStartScene" text="Back to main menu" />
    </children>
 </AnchorPane>
