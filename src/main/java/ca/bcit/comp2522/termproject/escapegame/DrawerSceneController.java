@@ -1,6 +1,13 @@
 package ca.bcit.comp2522.termproject.escapegame;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+import javax.xml.crypto.Data;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class DrawerSceneController {
+public class DrawerSceneController implements Serializable {
 
     @FXML
     private Button submitPinInput;
@@ -36,13 +43,9 @@ public class DrawerSceneController {
 
     private Parent root;
 
-    private boolean hasWon;
-
-    private boolean hasScrewdriver;
-
-    private boolean hasClosetKey;
-
     public void switchToDrawerScene(MouseEvent event) throws IOException {
+        SceneData sd = (SceneData) DataSaver.load();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("drawer-scene.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -57,7 +60,7 @@ public class DrawerSceneController {
         submitPinInput = (Button) loader.getNamespace().get("submitPinInput");
         pinInput = (TextField) loader.getNamespace().get("pinInput");
         dialogue = (Text) loader.getNamespace().get("dialogue");
-        paperBtn.setOnMouseClicked(e -> showDialogue("The paper says 'try multiplication'.", dialogue));
+        paperBtn.setOnMouseClicked(e -> showDialogue("Hours * Minutes", dialogue));
 
         safeBtn.setOnMouseClicked(e -> {
             pinInput.setVisible(true);
@@ -70,14 +73,13 @@ public class DrawerSceneController {
                     pinInput.setVisible(false);
                     submitPinInput.setVisible(false);
                     showDialogue("You found a screwdriver!", dialogue);
-                    hasScrewdriver = true;
-                    // TODO
-                    System.out.println("FOUND: " + hasScrewdriver);
+                    sd.setHasScrewdriver(true);
+                    DataSaver.save(sd);
+                    System.out.println("FOUND: " + sd.isHasScrewdriver());
                 } else {
                     pinInput.setVisible(false);
                     submitPinInput.setVisible(false);
                     showDialogue("Wrong pin. Try again.", dialogue);
-                    System.out.println("FOUND: " + hasScrewdriver);
                 }
             });
         });
@@ -87,8 +89,6 @@ public class DrawerSceneController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-scene.fxml"));
         root = loader.load();
         GameSceneController gsc = loader.getController();
-        gsc.setHasClosetKey(hasClosetKey);
-        gsc.setHasScrewdriver(hasScrewdriver);
         gsc.switchToGameScene(event);
     }
 
@@ -100,21 +100,5 @@ public class DrawerSceneController {
 
     public void hideDialogue(Text textNode) {
         textNode.setVisible(false);
-    }
-
-    public boolean getHasScrewdriver() {
-        return hasScrewdriver;
-    }
-
-    public void setHasScrewdriver(boolean hasScrewdriver) {
-        this.hasScrewdriver = hasScrewdriver;
-    }
-
-    public boolean getHasClosetKey() {
-        return hasClosetKey;
-    }
-
-    public void setHasClosetKey(boolean hasClosetKey) {
-        this.hasClosetKey = hasClosetKey;
     }
 }

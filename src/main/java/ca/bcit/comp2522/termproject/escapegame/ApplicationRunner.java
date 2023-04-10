@@ -20,6 +20,9 @@ import java.io.IOException;
 public class ApplicationRunner extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        SceneData sd = new SceneData();
+        DataSaver.save(sd);
+
         Parent root = FXMLLoader.load(getClass().getResource("starting-screen.fxml"));
         Scene scene = new Scene(root);
 

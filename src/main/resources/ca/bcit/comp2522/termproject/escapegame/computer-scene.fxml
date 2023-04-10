@@ -21,7 +21,7 @@
          </font>
       </Text>
       <TextArea fx:id="input" layoutX="201.0" layoutY="225.0" prefHeight="68.0" prefWidth="198.0" />
-      <Text fx:id="codeword" fill="WHITE" layoutX="208.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
+      <Text fx:id="codeword" fill="WHITE" layoutX="115.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codeword" textAlignment="CENTER">
          <font>
             <Font name="Monospaced Regular" size="77.0" />
          </font>

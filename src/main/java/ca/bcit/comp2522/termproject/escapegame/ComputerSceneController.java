@@ -1,6 +1,9 @@
 package ca.bcit.comp2522.termproject.escapegame;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ComputerSceneController {
+public class ComputerSceneController implements Serializable {
 
     @FXML
     private Text codeword;
@@ -28,18 +31,14 @@ public class ComputerSceneController {
 
     private Parent root;
 
-    private boolean hasWon;
-
-    private boolean hasScrewdriver;
-
-    private boolean hasClosetKey;
-
     public void switchToComputerScene(MouseEvent event) throws IOException, InterruptedException {
+        SceneData sd = (SceneData) DataSaver.load();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("computer-scene.fxml"));
         codeword = (Text) loader.getNamespace().get("codeword");
         input = (TextArea) loader.getNamespace().get("input");
 
-        codeword.setText("I love programming!");
+        showDialogue("I love programming!", codeword);
 
         int duration = 3;
         String currentAnswer;
@@ -47,13 +46,14 @@ public class ComputerSceneController {
             showDialogue(String.valueOf(i), dialogue);
             currentAnswer = input.getText();
             if (currentAnswer.equals(codeword.getText())) {
-                setHasWon(true);
+                sd.setHasWon(true);
+                DataSaver.save(sd);
                 break;
             }
             Thread.sleep(500);
         }
-        if (getHasWon()) {
-            showDialogue("You've beat the game.", dialogue);
+        if (sd.isHasWon()) {
+            showDialogue("The door has unlocked!", dialogue);
             // TODO: Enter name into leaderboard
         }
     }
@@ -66,29 +66,5 @@ public class ComputerSceneController {
 
     public void hideDialogue(Text textNode) {
         textNode.setVisible(false);
-    }
-
-    public boolean getHasWon() {
-        return hasWon;
-    }
-
-    public void setHasWon(boolean hasWon) {
-        this.hasWon = hasWon;
-    }
-
-    public boolean getHasScrewdriver() {
-        return hasScrewdriver;
-    }
-
-    public void setHasScrewdriver(boolean hasScrewdriver) {
-        this.hasScrewdriver = hasScrewdriver;
-    }
-
-    public boolean getHasClosetKey() {
-        return hasClosetKey;
-    }
-
-    public void setHasClosetKey(boolean hasClosetKey) {
-        this.hasClosetKey = hasClosetKey;
     }
 }
