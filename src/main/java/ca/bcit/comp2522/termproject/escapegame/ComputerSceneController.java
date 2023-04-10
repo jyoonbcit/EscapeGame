@@ -4,12 +4,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,37 +30,54 @@ public class ComputerSceneController implements Serializable {
     @FXML
     private TextArea input;
 
+    private FXMLLoader loader;
+
+    private SceneData sd;
+
     private Stage stage;
 
     private Scene scene;
 
     private Parent root;
 
-    public void switchToComputerScene(MouseEvent event) throws IOException, InterruptedException {
-        SceneData sd = (SceneData) DataSaver.load();
+    public void switchToComputerScene(MouseEvent event) throws IOException {
+        sd = (SceneData) DataSaver.load();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("computer-scene.fxml"));
+        loader = new FXMLLoader(getClass().getResource("computer-scene.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+
         codeword = (Text) loader.getNamespace().get("codeword");
         input = (TextArea) loader.getNamespace().get("input");
+        dialogue = (Text) loader.getNamespace().get("dialogue");
 
-        showDialogue("I love programming!", codeword);
+        String codewordString = "I love programming!\n";
+        showDialogue(codewordString, codeword);
 
-        int duration = 3;
-        String currentAnswer;
-        for (int i = 0; i < duration; i++) {
-            showDialogue(String.valueOf(i), dialogue);
-            currentAnswer = input.getText();
-            if (currentAnswer.equals(codeword.getText())) {
-                sd.setHasWon(true);
-                DataSaver.save(sd);
-                break;
+        input.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                String currentAnswer = input.getText();
+                if (currentAnswer.equals(codewordString)) {
+                    sd.setHasWon(true);
+                    showDialogue("The door has unlocked!", dialogue);
+                    DataSaver.save(sd);
+                } else {
+                    showDialogue("Try again.", dialogue);
+                    input.clear();
+                }
             }
-            Thread.sleep(500);
-        }
-        if (sd.isHasWon()) {
-            showDialogue("The door has unlocked!", dialogue);
-            // TODO: Enter name into leaderboard
-        }
+        });
+    }
+
+    public void switchToGameScene(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("game-scene.fxml"));
+        root = loader.load();
+        GameSceneController gsc = loader.getController();
+        gsc.switchToGameScene(event);
     }
 
     public void showDialogue(String msg, Text textNode) {

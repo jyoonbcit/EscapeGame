@@ -1,10 +1,6 @@
 package ca.bcit.comp2522.termproject.escapegame;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import javax.xml.crypto.Data;
@@ -69,7 +65,7 @@ public class DrawerSceneController implements Serializable {
             submitPinInput.setOnMouseClicked(f -> {
                 String userGuess = pinInput.getText();
                 System.out.println(userGuess);
-                if (userGuess.equals("1001")) {
+                if (userGuess.equals("1020")) {
                     pinInput.setVisible(false);
                     submitPinInput.setVisible(false);
                     showDialogue("You found a screwdriver!", dialogue);

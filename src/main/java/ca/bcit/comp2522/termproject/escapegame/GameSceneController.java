@@ -1,13 +1,7 @@
 package ca.bcit.comp2522.termproject.escapegame;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +35,9 @@ public class GameSceneController implements Serializable {
 
     @FXML
     private Button closetBtn;
+
+    @FXML
+    private Button doorBtn;
 
     @FXML
     private Text dialogue;
@@ -87,6 +84,9 @@ public class GameSceneController implements Serializable {
         keyBtn = (Button) loader.getNamespace().get("keyBtn");
         keyImage = (ImageView) loader.getNamespace().get("keyImage");
         closetBtn = (Button) loader.getNamespace().get("closetBtn");
+        doorBtn = (Button) loader.getNamespace().get("doorBtn");
+        laptopImage = (ImageView) loader.getNamespace().get("laptopImage");
+        laptopBtn = (Button) loader.getNamespace().get("laptopBtn");
 
         paintingBtn.setOnMouseClicked(e -> {
             if (sd.isHasScrewdriver()) {
@@ -107,23 +107,17 @@ public class GameSceneController implements Serializable {
         closetBtn.setOnMouseClicked(g -> {
             if (sd.isHasClosetKey()) {
                 showDialogue("You open the closet.", dialogue);
-                laptopImage = (ImageView) loader.getNamespace().get("laptopImage");
-                laptopBtn = (Button) loader.getNamespace().get("laptopBtn");
                 laptopImage.setVisible(true);
-                laptopBtn.setOnMouseClicked(h -> {
-                    try {
-                        switchToComputerScene(event);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    if (sd.isHasWon()) {
-                        showDialogue("The door has opened.", dialogue);
-                    } else {
-                        showDialogue("Try again.", dialogue);
-                    }
-                });
+                laptopBtn.setVisible(true);
+            } else {
+                showDialogue("The closet is locked.", dialogue);
+            }
+        });
+        doorBtn.setOnMouseClicked(h -> {
+            if (sd.isHasWon()) {
+                showDialogue("Congratulations, you have escaped!", dialogue);
+            } else {
+                showDialogue("You can't escape yet!", dialogue);
             }
         });
     }

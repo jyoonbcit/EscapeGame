@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,16 +16,17 @@
             <Image url="@images/cmd.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="105.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QTE: Copy the text!">
+      <Text fx:id="dialogue" fill="WHITE" layoutX="-10.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copy the text and hit enter!" textAlignment="CENTER" wrappingWidth="618.6292877197266">
          <font>
             <Font size="46.0" />
          </font>
       </Text>
       <TextArea fx:id="input" layoutX="201.0" layoutY="225.0" prefHeight="68.0" prefWidth="198.0" />
-      <Text fx:id="codeword" fill="WHITE" layoutX="115.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codeword" textAlignment="CENTER">
+      <Text fx:id="codeword" fill="WHITE" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codeword" textAlignment="CENTER" wrappingWidth="600.0">
          <font>
-            <Font name="Monospaced Regular" size="77.0" />
+            <Font name="Monospaced Regular" size="48.0" />
          </font>
       </Text>
+      <Button layoutX="24.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#switchToGameScene" text="Back" />
    </children>
 </AnchorPane>
