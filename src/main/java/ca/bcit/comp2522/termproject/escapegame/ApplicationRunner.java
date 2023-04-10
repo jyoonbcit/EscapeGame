@@ -8,7 +8,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class ApplicationRunner extends Application {
@@ -22,6 +28,16 @@ public class ApplicationRunner extends Application {
         Media media = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
+
+        File timeFile = new File("time.txt");
+        timeFile.createNewFile();
+        FileWriter myWriter = new FileWriter("time.txt");
+
+        long currentTime = System.currentTimeMillis();
+        String currentTimeString = String.valueOf(currentTime);
+
+        myWriter.write(currentTimeString);
+        myWriter.close();
 
         stage.setScene(scene);
         stage.setResizable(false);
