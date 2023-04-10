@@ -56,6 +56,8 @@ public class GameSceneController implements Serializable {
     private Button laptopBtn;
     // Scene data
     private SceneData sd;
+    // Leaderboard data
+    private LeaderboardData ld;
     // Current stage
     private Stage stage;
     // Current scene
@@ -95,6 +97,14 @@ public class GameSceneController implements Serializable {
         } else {
             sd = new SceneData();
             DataSaver.saveKeys(sd);
+        }
+    }
+    public void loadLeaderboardData() {
+        if (DataSaver.loadLeaderboard() != null) {
+            ld = (LeaderboardData) DataSaver.loadLeaderboard();
+        } else {
+            ld = new LeaderboardData();
+            DataSaver.saveLeaderboard(ld);
         }
     }
 
@@ -146,6 +156,11 @@ public class GameSceneController implements Serializable {
             if (sd.isHasWon()) {
                 long elapsedTime = System.currentTimeMillis() - sd.getStartTime();
                 Time elapsedTimeObj = new Time(elapsedTime - 57600000);
+
+//                LeaderboardData lbd = (LeaderboardData) DataSaver.loadLeaderboard();
+//                lbd.addTime(elapsedTime);
+//                DataSaver.saveLeaderboard(lbd);
+
                 String elapsedTimeString = elapsedTimeObj.toString();
                 showDialogue("Congratulations, you have escaped! Time taken: " + elapsedTimeString, dialogue);
             } else {

@@ -47,4 +47,38 @@ public class DataSaver {
         }
         return null;
     }
+
+    /**
+     * Saves data of serializable object for scores.
+     *
+     * @param data data of serializable object
+     */
+    public static void saveLeaderboard(final Serializable data) {
+        try {
+            FileOutputStream fos = new FileOutputStream("leaderboard.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(data);
+            oos.close();
+        } catch (IOException e) {
+            System.out.println("Could not save leaderboard data.");
+        }
+    }
+
+    /**
+     * Loads data of serialized object.
+     *
+     * @return serialized object
+     * @throws IOException if text file is not found
+     * @throws ClassNotFoundException if class is not found
+     */
+    public static Object loadLeaderboard() {
+        try {
+            FileInputStream fis = new FileInputStream("leaderboard.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            return ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Could not load leaderboard data.");
+        }
+        return null;
+    }
 }
