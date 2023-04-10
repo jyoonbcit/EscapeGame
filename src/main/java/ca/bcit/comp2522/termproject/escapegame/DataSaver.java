@@ -1,16 +1,25 @@
 package ca.bcit.comp2522.termproject.escapegame;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * DataSaver.
+ *
+ * @author Jihoon Yoon, Wilbur Lin
+ * @version 2023-04-09
+ */
 public class DataSaver {
-
-    public static void save(Serializable data) {
+    /**
+     * Saves data of serializable object.
+     *
+     * @param data data of serializable object
+     */
+    public static void saveKeys(final Serializable data) {
         try {
             FileOutputStream fos = new FileOutputStream("keys.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -21,15 +30,20 @@ public class DataSaver {
         }
     }
 
-    public static Object load() {
+    /**
+     * Loads data of serialized object.
+     *
+     * @return serialized object
+     * @throws IOException if text file is not found
+     * @throws ClassNotFoundException if class is not found
+     */
+    public static Object loadKeys() {
         try {
             FileInputStream fis = new FileInputStream("keys.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
             return ois.readObject();
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println("Could not load key data.");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
         return null;
     }

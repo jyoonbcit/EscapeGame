@@ -7,11 +7,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+/**
+ * StartSceneController.
+ *
+ * @author Jihoon Yoon, Wilbur Lin
+ * @version 2023-04-09
+ */
 public class StartSceneController {
 
     private Stage stage;
@@ -20,24 +23,42 @@ public class StartSceneController {
 
     private Parent root;
 
-    public void switchToStartingScene(MouseEvent event) throws IOException {
+    /**
+     * Switches to the start FXML scene.
+     *
+     * @param event mouse event
+     * @throws IOException if fxml file cannot be found
+     */
+    public void switchToStartScene(final MouseEvent event) throws IOException {
         SceneData sd = new SceneData();
-        DataSaver.save(sd);
+        DataSaver.saveKeys(sd);
 
-        Parent root = FXMLLoader.load(getClass().getResource("starting-screen.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("starting-screen.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
-    public void switchToGameScene(MouseEvent event) throws IOException {
+    /**
+     * Switches to the game FXML scene.
+     *
+     * @param event mouse event
+     * @throws IOException if fxml file cannot be found
+     */
+    public void switchToGameScene(final MouseEvent event) throws IOException {
         GameSceneController gsc = new GameSceneController();
         gsc.switchToGameScene(event);
     }
 
-    public void switchToLeaderboardScene(MouseEvent event) throws IOException {
+    /**
+     * Switches to the leaderboard FXML scene.
+     *
+     * @param event mouse event
+     * @throws IOException if fxml file cannot be found
+     */
+    public void switchToLeaderboardScene(final MouseEvent event) throws IOException {
         LeaderboardSceneController lsc = new LeaderboardSceneController();
         lsc.switchToLeaderboardScene(event);
     }
