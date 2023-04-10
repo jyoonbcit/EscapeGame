@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * ApplicationRunner.
  *
- * @author Jihoon Yoon, Wilbur Lin
+ * @author Jihoon Yoon, Wilber Lin
  * @version 2023-04-09
  */
 public class ApplicationRunner extends Application {

@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 /**
  * GameSceneController.
  *
- * @author Jihoon Yoon, Wilbur Lin
+ * @author Jihoon Yoon, Wilber Lin
  * @version 2023-04-09
  */
 public class GameSceneController implements Serializable {
