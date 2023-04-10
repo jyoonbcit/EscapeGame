@@ -8,18 +8,22 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Calendar;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * ApplicationRunner.
+ *
+ * @author Jihoon Yoon, Wilbur Lin
+ * @version 2023-04-09
+ */
 public class ApplicationRunner extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(final Stage stage) throws IOException {
+        SceneData sd = new SceneData();
+        DataSaver.saveKeys(sd);
+
         Parent root = FXMLLoader.load(getClass().getResource("starting-screen.fxml"));
         Scene scene = new Scene(root);
 
@@ -44,7 +48,12 @@ public class ApplicationRunner extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    /**
+     * Launches the game.
+     *
+     * @param args arguments
+     */
+    public static void main(final String[] args) {
         launch();
     }
 }

@@ -45,12 +45,18 @@
             <Image url="@images/clock.png" />
          </image>
       </ImageView>
-      <Button fx:id="keyBtn" layoutX="161.0" layoutY="153.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="39.0" text="Key" />
-      <Button fx:id="deskBtn" layoutX="76.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#switchToDrawerScene" prefHeight="99.0" prefWidth="214.0" text="Desk" />
-      <Button fx:id="paintingBtn" layoutX="132.0" layoutY="99.0" mnemonicParsing="false" prefHeight="133.0" prefWidth="97.0" text="Painting" />
-      <Button fx:id="closetBtn" layoutX="384.0" layoutY="116.0" mnemonicParsing="false" prefHeight="221.0" prefWidth="109.0" text="Closet" />
-      <Button fx:id="doorBtn" layoutX="549.0" layoutY="99.0" mnemonicParsing="false" prefHeight="238.0" prefWidth="60.0" text="Door" />
-      <Button fx:id="clockBtn" layoutX="265.0" layoutY="88.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" text="Clock" />
+      <ImageView fx:id="laptopImage" fitHeight="50.0" fitWidth="60.0" layoutX="411.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/laptop.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="keyBtn" layoutX="161.0" layoutY="153.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="39.0" text="Key" />
+      <Button fx:id="deskBtn" layoutX="76.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#switchToDrawerScene" opacity="0.0" prefHeight="99.0" prefWidth="214.0" text="Desk" />
+      <Button fx:id="paintingBtn" layoutX="132.0" layoutY="99.0" mnemonicParsing="false" opacity="0.0" prefHeight="133.0" prefWidth="97.0" text="Painting" />
+      <Button fx:id="closetBtn" layoutX="384.0" layoutY="116.0" mnemonicParsing="false" opacity="0.0" prefHeight="221.0" prefWidth="109.0" text="Closet" />
+      <Button fx:id="laptopBtn" layoutX="401.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#switchToComputerScene" opacity="0.0" prefHeight="65.0" prefWidth="74.0" text="Laptop" visible="false" />
+      <Button fx:id="doorBtn" layoutX="549.0" layoutY="99.0" mnemonicParsing="false" opacity="0.0" prefHeight="238.0" prefWidth="60.0" text="Door" />
+      <Button fx:id="clockBtn" layoutX="265.0" layoutY="88.0" mnemonicParsing="false" opacity="0.0" prefHeight="50.0" prefWidth="52.0" text="Clock" />
       <Text fx:id="dialogue" fill="WHITE" layoutX="70.0" layoutY="352.0" stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="488.1417236328125">
          <font>
             <Font size="30.0" />
@@ -59,11 +65,5 @@
             <DropShadow />
          </effect>
       </Text>
-      <ImageView fx:id="laptopImage" fitHeight="50.0" fitWidth="60.0" layoutX="411.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/laptop.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="laptopBtn" layoutX="401.0" layoutY="193.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="74.0" text="Laptop" />
    </children>
 </AnchorPane>

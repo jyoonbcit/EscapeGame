@@ -21,13 +21,13 @@
             <Image url="@images/paper.png" />
          </image>
       </ImageView>
-      <Button fx:id="paperBtn" layoutX="110.0" layoutY="198.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="150.0" text="paperBtn" />
+      <Button fx:id="paperBtn" layoutX="110.0" layoutY="198.0" mnemonicParsing="false" opacity="0.0" prefHeight="54.0" prefWidth="150.0" text="paperBtn" />
       <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="314.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/safe.png" />
          </image>
       </ImageView>
-      <Button fx:id="safeBtn" layoutX="314.0" layoutY="133.0" mnemonicParsing="false" prefHeight="106.0" prefWidth="115.0" text="safeBtn" />
+      <Button fx:id="safeBtn" layoutX="314.0" layoutY="133.0" mnemonicParsing="false" opacity="0.0" prefHeight="106.0" prefWidth="115.0" text="safeBtn" />
       <Button fx:id="drawerBackBtn" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#switchToGameScene" text="Back" />
       <Text fx:id="dialogue" fill="WHITE" layoutX="70.0" layoutY="352.0" stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="488.1417236328125">
          <font>
