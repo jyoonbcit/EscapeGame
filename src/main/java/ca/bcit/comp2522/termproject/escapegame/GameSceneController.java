@@ -2,6 +2,7 @@ package ca.bcit.comp2522.termproject.escapegame;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Time;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -143,7 +144,10 @@ public class GameSceneController implements Serializable {
         });
         doorBtn.setOnMouseClicked(h -> {
             if (sd.isHasWon()) {
-                showDialogue("Congratulations, you have escaped!", dialogue);
+                long elapsedTime = System.currentTimeMillis() - sd.getStartTime();
+                Time elapsedTimeObj = new Time(elapsedTime - 57600000);
+                String elapsedTimeString = elapsedTimeObj.toString();
+                showDialogue("Congratulations, you have escaped! Time taken: " + elapsedTimeString, dialogue);
             } else {
                 showDialogue("You can't escape yet!", dialogue);
             }

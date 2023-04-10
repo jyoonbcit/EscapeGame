@@ -33,16 +33,6 @@ public class ApplicationRunner extends Application {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
 
-        File timeFile = new File("time.txt");
-        timeFile.createNewFile();
-        FileWriter myWriter = new FileWriter("time.txt");
-
-        long currentTime = System.currentTimeMillis();
-        String currentTimeString = String.valueOf(currentTime);
-
-        myWriter.write(currentTimeString);
-        myWriter.close();
-
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

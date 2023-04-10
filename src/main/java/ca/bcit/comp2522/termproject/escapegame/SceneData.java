@@ -17,6 +17,7 @@ public class SceneData implements Serializable {
     private boolean hasScrewdriver;
     // Records whether player has the closet key
     private boolean hasClosetKey;
+    private long startTime;
 
     /**
      * Default SceneData constructor.
@@ -25,6 +26,7 @@ public class SceneData implements Serializable {
         hasWon = false;
         hasScrewdriver = false;
         hasClosetKey = false;
+        startTime = System.currentTimeMillis();
     }
 
     /**
@@ -76,5 +78,9 @@ public class SceneData implements Serializable {
      */
     public boolean isHasClosetKey() {
         return hasClosetKey;
+    }
+
+    public long getStartTime() {
+        return startTime;
     }
 }
